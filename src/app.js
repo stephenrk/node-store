@@ -2,8 +2,12 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
+
+// Conecta ao banco
+mongoose.connect('mongodb://stephen:stiff123@ds018268.mlab.com:18268/nodestore-stephen', { useNewUrlParser: true });
 
 // Carrega as rotas
 const indexRoute = require('./routes/index-route');
