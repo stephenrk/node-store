@@ -3,6 +3,9 @@
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 
+/// propriedade dentro do find serve p/ adicionar filtro, neste caso, busca os produtos ativos
+/// o segundo parâmetro serve p/ informar quais campos deve trazer
+// Listar Produtos
 exports.get = async() => {
     const res = await Product.find({ 
         active: true 
@@ -10,6 +13,7 @@ exports.get = async() => {
     return res;
 };
 
+// Listar Produtos por Slug
 exports.getBySlug = async(slug) => {
     const res = await Product.findOne({ 
         slug: slug,
@@ -18,12 +22,14 @@ exports.getBySlug = async(slug) => {
     return res;
 };
 
+// Listar Produtos por Id
 exports.getById = async(id) => {
     const res = await Product
         .findById(id);
     return res;
 };
 
+// Listar Produtos por Tag
 exports.getByTag = async(tag) => {
     const res = await Product.find({
         tags: tag,
@@ -32,11 +38,13 @@ exports.getByTag = async(tag) => {
     return res;
 };
 
+// Criar Produto
 exports.create = async(data) => {
     var product = new Product(data);
     await product.save();
 };
 
+// Alterar Produto
 exports.update = async(id, data) => {
     await Product.findByIdAndUpdate(id, {
         $set: {
@@ -48,6 +56,7 @@ exports.update = async(id, data) => {
     });
 };
 
+// Remover Produto
 exports.delete = async(id) => {
     await Product.findByIdAndRemove(id);
 };

@@ -1,10 +1,10 @@
 'use strict';
 
-const mongoose = require('mongoose');
-const Product = mongoose.model('Product');
+// Imports
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/product-repository');
 
+// GET '/products'
 exports.get = async(req, res, next) => {
     try {
         const data = await repository.get();
@@ -16,6 +16,7 @@ exports.get = async(req, res, next) => {
     }
 };
 
+// GET '/products/:slug'
 exports.getBySlug = async(req, res, next) => {
     try {
         const data = await repository.getBySlug(req.params.slug);
@@ -27,6 +28,7 @@ exports.getBySlug = async(req, res, next) => {
     }
 };
 
+// GET '/products/admin/:id'
 exports.getById = async(req, res, next) => {
     try {
         const data = await repository.getById(req.params.id);
@@ -38,6 +40,7 @@ exports.getById = async(req, res, next) => {
     }
 };
 
+// GET '/products/tags/:tag'
 exports.getByTag = async(req, res, next) => {
     try {
         const data = await datarepository.getByTag(req.params.tag);
@@ -49,6 +52,7 @@ exports.getByTag = async(req, res, next) => {
     }
 };
 
+// POST '/products'
 exports.post = async(req, res, next) => {
     let contract = new ValidationContract();
     contract.hasMinLen(req.body.title, 3, 'O título deve conter pelo menos 3 caracteres');
@@ -73,6 +77,7 @@ exports.post = async(req, res, next) => {
     }
 };
 
+// PUT '/products'
 exports.put = async(req, res, next) => {
     try {
         await repository.update(req.params.id, req.body);
@@ -86,6 +91,7 @@ exports.put = async(req, res, next) => {
     }
 };
 
+// DELETE '/products'
 exports.delete = async(req, res, next) => {
     try {
         await repository.delete(req.body.id);

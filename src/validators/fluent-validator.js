@@ -1,5 +1,7 @@
 'use strict';
 
+// Fluent Validator - by Andre Baltiere
+
 let errors = [];
 
 function ValidationContract() {

@@ -4,12 +4,16 @@ const app = require('../src/app');
 const debug = require('debug')('balta:server');
 const http = require('http');
 
+// Função para pegar a porta do server e normalizar
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+// Cria um server HTTP
 const server = http.createServer(app);
 
+// Começa a escutar uma determinada porta
 server.listen(port);
+// Executa função onError caso algo dê errado
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -29,6 +33,7 @@ function normalizePort(val) {
     return false;
 }
 
+// Tratamento de erros do server
 function onError(error) {
     if (error.syscall !== 'listen') {
         throw error;
